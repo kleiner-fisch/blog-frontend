@@ -1,0 +1,255 @@
+{
+    "_embedded" : {
+      "postDTOes" : [ {
+        "postId" : 77863,
+        "title" : "string",
+        "content" : "string",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/blog/api/v1/posts/77863"
+          }
+        },
+        "author" : {
+          "username" : "user1",
+          "mail" : "mail@mail.org",
+          "_links" : {
+            "userPosts" : {
+              "href" : "http://localhost:8080/blog/api/v1/posts/users/109"
+            },
+            "self" : {
+              "href" : "http://localhost:8080/blog/api/v1/users/109"
+            }
+          },
+          "userId" : 109
+        },
+        "date" : "2024-03-28T16:49:07.561"
+      }, {
+        "postId" : 73897,
+        "title" : "CrunchGear",
+        "content" : "The Marvel Comics app one of the three iPad apps that actually make me want to drink the Apple kool-aid and go lay down alongside the Apple faithful to slowly drift towards a land of simple, non-multitasking computing. So far we&#8217;ve only seen screenshots and a press release for the app, but Xeni over at Boing Boing posted a quick hands-on video that sealed my fate. I think I&#8217;m going to have to get an iPad now.",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/blog/api/v1/posts/73897"
+          }
+        },
+        "author" : {
+          "username" : "Matt_Burns",
+          "mail" : "Matt_Burns@mail.com",
+          "_links" : {
+            "userPosts" : {
+              "href" : "http://localhost:8080/blog/api/v1/posts/users/28"
+            },
+            "self" : {
+              "href" : "http://localhost:8080/blog/api/v1/users/28"
+            }
+          },
+          "userId" : 28
+        },
+        "date" : "2010-04-02T10:15:30"
+      }, {
+        "postId" : 73898,
+        "title" : "CrunchGear",
+        "content" : "The Marvel Comics app one of the three iPad apps that actually make me want to drink the Apple kool-aid and go lay down alongside the Apple faithful to slowly drift towards a land of simple, non-multitasking computing. So far we&#8217;ve only seen screenshots and a press release for the app, but Xeni over at Boing Boing posted a quick hands-on video that sealed my fate. I think I&#8217;m going to have to get an iPad now.",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/blog/api/v1/posts/73898"
+          }
+        },
+        "author" : {
+          "username" : "Matt_Burns",
+          "mail" : "Matt_Burns@mail.com",
+          "_links" : {
+            "userPosts" : {
+              "href" : "http://localhost:8080/blog/api/v1/posts/users/28"
+            },
+            "self" : {
+              "href" : "http://localhost:8080/blog/api/v1/users/28"
+            }
+          },
+          "userId" : 28
+        },
+        "date" : "2010-04-02T10:15:30"
+      }, {
+        "postId" : 73899,
+        "title" : "CrunchGear",
+        "content" : "The Marvel Comics app one of the three iPad apps that actually make me want to drink the Apple kool-aid and go lay down alongside the Apple faithful to slowly drift towards a land of simple, non-multitasking computing. So far we&#8217;ve only seen screenshots and a press release for the app, but Xeni over at Boing Boing posted a quick hands-on video that sealed my fate. I think I&#8217;m going to have to get an iPad now.",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/blog/api/v1/posts/73899"
+          }
+        },
+        "author" : {
+          "username" : "Matt_Burns",
+          "mail" : "Matt_Burns@mail.com",
+          "_links" : {
+            "userPosts" : {
+              "href" : "http://localhost:8080/blog/api/v1/posts/users/28"
+            },
+            "self" : {
+              "href" : "http://localhost:8080/blog/api/v1/users/28"
+            }
+          },
+          "userId" : 28
+        },
+        "date" : "2010-04-02T10:15:30"
+      }, {
+        "postId" : 73900,
+        "title" : "CrunchGear",
+        "content" : "The Marvel Comics app one of the three iPad apps that actually make me want to drink the Apple kool-aid and go lay down alongside the Apple faithful to slowly drift towards a land of simple, non-multitasking computing. So far we&#8217;ve only seen screenshots and a press release for the app, but Xeni over at Boing Boing posted a quick hands-on video that sealed my fate. I think I&#8217;m going to have to get an iPad now.",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/blog/api/v1/posts/73900"
+          }
+        },
+        "author" : {
+          "username" : "Matt_Burns",
+          "mail" : "Matt_Burns@mail.com",
+          "_links" : {
+            "userPosts" : {
+              "href" : "http://localhost:8080/blog/api/v1/posts/users/28"
+            },
+            "self" : {
+              "href" : "http://localhost:8080/blog/api/v1/users/28"
+            }
+          },
+          "userId" : 28
+        },
+        "date" : "2010-04-02T10:15:30"
+      }, {
+        "postId" : 73919,
+        "title" : "CrunchGear",
+        "content" : "This is the 100 million dollar question. Are you, being among the most well-informed and knowledgeable consumers base around, going to buy the iPad? It goes on sale 24 hours from now and we want to know both sides as CrunchGear&#8217;s visitors are nearly equally divided between Windows and Mac users. Sound off in the comments below and please keep the flames well tended and under control. We&#8217;re all friends here no matter if you feel iPad buyers are flushing $500+ away for an oversized iPod touch. Read More",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/blog/api/v1/posts/73919"
+          }
+        },
+        "author" : {
+          "username" : "Matt_Burns",
+          "mail" : "Matt_Burns@mail.com",
+          "_links" : {
+            "userPosts" : {
+              "href" : "http://localhost:8080/blog/api/v1/posts/users/28"
+            },
+            "self" : {
+              "href" : "http://localhost:8080/blog/api/v1/users/28"
+            }
+          },
+          "userId" : 28
+        },
+        "date" : "2010-04-02T10:15:30"
+      }, {
+        "postId" : 58399,
+        "title" : "We Just Tested Twitter&#8217;s @anywhere Platform (Screenshots)",
+        "content" : "During his keynote at SXSW last month, Twitter CEO Evan Wiliams announced an upcoming new platform called @anywhere, which would allow third party sites to integrate Twitter features (he also showed off some of the partners who would be featuring the platform, which you can see in the image at right).  Twitter didn&#8217;t give a launch date for when sites would start integrating the new platform, but it looks like we&#8217;ve just come across the first site to feature @anywhere.  Meet Eggboiling.com.The site, which will almost certainly be pulled down soon after this post is published, is clearly a testing environment for @anywhere, but it&#8217;s currently open to the public.  Update: Twitter has taken the site down. It features the following (all shown in the screenshots below): various variable states; a button to &#8216;Connect With Twitter&#8217;; buttons to follow twitter users @jack, @biz, and @ev; a test hovercard that allows me to see @wendyverse&#8217;s latest tweets and follow counts at a glance, and a test box that lets me tweet.  It isn&#8217;t particularly easy on the eyes, but it works well enough.Hitting &#8220;Connect to Twitter&#8221; pulled in my Twitter profile photo and gave me the option to log out.  Clicking on each of the &#8216;follow&#8217; buttons appropriately changed the status from &#8220;Follow @jack&#8221; to &#8220;Following @jack&#8221; the next time I refreshed the page. (it just showed &#8216;pending&#8217; until I refreshed). And sending a tweet from the tweet box worked properly (it says that my tweet was sent via Egg Boiling).If you&#8217;re fast, you may be able to try it out for yourself.Before logging inOAuth to loginConnected to Twitter (but before image/logout link have loaded)Image/logout link appear after refreshing the pageTesting the hovercardAfter clicking the &#8216;more&#8217; button on the hovercardThanks to Spencer Transier for the tip!CrunchBase Information",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/blog/api/v1/posts/58399"
+          }
+        },
+        "author" : {
+          "username" : "Jason_Kincaid",
+          "mail" : "Jason_Kincaid@mail.com",
+          "_links" : {
+            "userPosts" : {
+              "href" : "http://localhost:8080/blog/api/v1/posts/users/2"
+            },
+            "self" : {
+              "href" : "http://localhost:8080/blog/api/v1/users/2"
+            }
+          },
+          "userId" : 2
+        },
+        "date" : "2010-04-01T10:15:30"
+      }, {
+        "postId" : 58400,
+        "title" : "Facebook To Launch &#8216;Relationships&#8217; At f8, Teams With Zynga To Spur Romance Through Gaming",
+        "content" : "Later this month Facebook is holding its f8 conference, where it will be launching a slew of new features (we&#8217;ve already broken the news on quite a few of them).  Tonight, the company has written  a blog post announcing what is perhaps the most ambitious and creepy of them all: Facebook is looking to get into the dating game, and it&#8217;s turning to Zynga for help.The gist of the new product?  Dubbed &#8216;Relationships&#8217;, Facebook is going to soon offer a section of the site dedicated to helping users meet potential romantic partners.  To do that, the company has been working with Zynga over the last four months to develop games that &#8220;synthesize romance and foster relationships through social gaming mechanics&#8221;, helping users flirt and get to know each other using Farmville-like games to help break the ice.In the post, Facebook says that it will look at the profiles of your previous boyfriends/girlfriends to determine the personality traits you&#8217;re attracted to most, and that it will also use advanced photographic analysis to figure out your preferred facial structure and body type. In an attempt to quell privacy concerns before they begin, Facebook notes that all of this is done automatically, and that at no point are employees allowed to view these reports on your innermost psyche. How reassuring.The site appears to be broken up into three sections: at the top is a section for &#8216;Flirts&#8217;, which displays the Facebook friends you&#8217;ve been interacting with most.  In a move certain to cause riots, Facebook is now allowing users to keep tabs on how many times each of their friends has visited their profile. Facebook claims that this will make it easier to figure out who is lusting after you, and that &#8220;shadier&#8221; visitors will simply learn not to be so creepy. Below this is a section for games and lessons.  These appear to be the Zynga-designed apps, which cover everything from flirting to lessons on hygiene.Finally, there&#8217;s a &#8216;Recent Dates&#8217; section.  It&#8217;s unclear exactly what this is for, but there&#8217;s a Facebook-branded baseball diamond that apparently prompts users to share &#8220;how far&#8221; they got on their recent dates to their friends&#8217; News Feeds.  Given how much these definitions have shifted over the years, this could get messy.The 6.8 ProjectPerhaps most interesting is the fact that the new Relationships feature belongs to a new (and somewhat sinister sounding) ongoing initiative that Facebook is internally calling The 6.8 Project. The name, which is an allusion to Earth&#8217;s total population of 6.8 billion people, is meant to symbolize Facebook&#8217;s goal of connecting everyone on the planet.  The concern is that that may not be enough.Facebook has grown so quickly over the last few years that the company is worried that its long-term expansion potential over the next decade is limited. At its current growth rate, Facebook will have saturated the market of Internet-using humans in seven years. So — to put things bluntly — they&#8217;re looking to encourage current users to procreate, though they&#8217;ve only said as much with cutesy euphemisms.Facebook wouldn&#8217;t comment on its future plans for the 6.8 Project, but we hear that the company intends to launch a &#8216;Babybook&#8217; directory for children up for adoption, and there are also discussions about lowering Facebook&#8217;s minimum age to five years old.Excerpt from Facebook&#8217;s Blog:&#8220;Over the last six years, Facebook has been embraced by over 400 million people around the world — and we&#8217;re still growing. During that time, our engineers have managed to overcome some truly monumental hurdles, empowering friends and families to share their photos, videos, and thoughts with the people they care about.But there&#8217;s still one fundamental human need that we haven&#8217;t yet been able to take care of, and ironically enough it&#8217;s the primary reason people log on to Facebook every day. It goes by many names: Love. Romance. Great White Buffalo.  Call it what you will, it&#8217;s something that all of us are looking for. We hope to help you find it with Facebook Relationships.We look forward to sharing more details about the new feature at this month&#8217;s f8 conference.  With Relationships, we&#8217;re going to take your friendships to the next level.CrunchBase Information",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/blog/api/v1/posts/58400"
+          }
+        },
+        "author" : {
+          "username" : "Jason_Kincaid",
+          "mail" : "Jason_Kincaid@mail.com",
+          "_links" : {
+            "userPosts" : {
+              "href" : "http://localhost:8080/blog/api/v1/posts/users/2"
+            },
+            "self" : {
+              "href" : "http://localhost:8080/blog/api/v1/users/2"
+            }
+          },
+          "userId" : 2
+        },
+        "date" : "2010-04-01T10:15:30"
+      }, {
+        "postId" : 58401,
+        "title" : "Blippy Does An End Run, Harnesses Gmail OAuth To Re-Enable Amazon Support",
+        "content" : "Early this year, Blippy, the highly controversial startup that lets you share your credit card and online purchases with your friends, ran into some trouble with Amazon.com.  Namely, Amazon told Blippy to stop pulling in user purchase information, and to go back and erase all existing data they&#8217;d already sucked in.  Today, Blippy users have regained the ability to share their Amazon purchases, but this time, Blippy doesn&#8217;t need Amazon&#8217;s permission.The new Amazon integration requires users to grant Blippy access to their Gmail accounts via OAuth (this only works with Gmail, though the site says it plans to support other email services soon). After linking your Gmail to Blippy, the service will automatically scan your account for Amazon receipts, which it will use to display the items you&#8217;ve purchased in your Blippy feed.  When I asked Blippy co-founder Philip Kaplan if they had Amazon&#8217;s approval, he said they didn&#8217;t ask for it, and they weren&#8217;t sure they needed it, either.The addition of Gmail OAuth support could mean big things for Blippy.  Because Blippy now has a relatively secure way to access your Gmail, it can add support for a plethora of online vendors who may not offer an API. Likewise, Blippy could use the same method to do end runs around services that don&#8217;t want Blippy tracking purchases in the first place.To be clear, OAuth is no magic bullet for keeping your data secure — you&#8217;re essentially giving Blippy the ability to monitor your Email. But users are already handing over their login credentials for plenty of services to Blippy, which is potentially an even worse security issue (with OAuth, they don&#8217;t actually store your password).Thanks to Mark Hendrickson for the tipCrunchBase Information",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/blog/api/v1/posts/58401"
+          }
+        },
+        "author" : {
+          "username" : "Jason_Kincaid",
+          "mail" : "Jason_Kincaid@mail.com",
+          "_links" : {
+            "userPosts" : {
+              "href" : "http://localhost:8080/blog/api/v1/posts/users/2"
+            },
+            "self" : {
+              "href" : "http://localhost:8080/blog/api/v1/users/2"
+            }
+          },
+          "userId" : 2
+        },
+        "date" : "2010-04-01T10:15:30"
+      }, {
+        "postId" : 58402,
+        "title" : "Behind The Scenes Of YouTube&#8217;s ASCII Prank",
+        "content" : "Today, millions of people around the world were introduced to TEXTp, a new video display format created by YouTube that converts the site&#8217;s videos into a flurry of ASCII characters.  The new format, which was implemented as a cost-saving measure, is saving YouTube $1 per second of content watched in bandwidth costs.Of course, TEXTp is just the latest April Fools prank to come from YouTube (past pranks have included Rick Rolling all of its users and flipping the site upside down).  Yesterday, I had a chance to sit down with some of the people behind this year&#8217;s prank.  Along with explaining how they actually got these ASCII-ized videos working, they also detailed YouTube&#8217;s process for figuring out which pranks get shown to the world. Be sure to check out our full list of other April Fools jokes here.So how did YouTube convert all of its videos to streaming lines of text?  The company leveraged a piece of its existing and seemingly unrelated technology: their 3D video player. Engineer Peter Bradshaw, who is behind the site&#8217;s 3D viewer, says that fellow engineer Blake Livingston adapted his work with Adobe&#8217;s  Pixel Bender (which is used to achieve the 3D effect) to convert the videos into ASCII.Billy Biggs, another software engineer at YouTube (who claims pranks are his full time job), also played a key role in the project.  Bradshaw initially hacked the effect together in one evening, but it took around three weeks for the prank team to get that &#8216;last 10%&#8217; done.The pranksters say that the idea had actually been circling at YouTube for over a year, and that there were many other pranks proposed.  In fact, each YouTube employee is invited to submit their idea in the months leading up to April 1.  To choose which one is actually deployed to users, YouTube uses Google&#8217;s Moderator tool.  After voting concludes, a smaller panel made up of engineers, product managers, and PR reps congregates to figure out which ideas are feasible (and won&#8217;t offend anyone).The prank team didn&#8217;t take this too lightly, either: as I left the the conference room yesterday afternoon, the team was still tweaking TEXTp, trying to hone in on the optimal font size and color palette while waging a war against the letter &#8216;M&#8217;, which had the nasty habit of showing up too often.If ASCII art is your thing, you may also be interested in ASCIImeo, an ASCIIized version of Vimeo.CrunchBase Information",
+        "_links" : {
+          "self" : {
+            "href" : "http://localhost:8080/blog/api/v1/posts/58402"
+          }
+        },
+        "author" : {
+          "username" : "Jason_Kincaid",
+          "mail" : "Jason_Kincaid@mail.com",
+          "_links" : {
+            "userPosts" : {
+              "href" : "http://localhost:8080/blog/api/v1/posts/users/2"
+            },
+            "self" : {
+              "href" : "http://localhost:8080/blog/api/v1/users/2"
+            }
+          },
+          "userId" : 2
+        },
+        "date" : "2010-04-01T10:15:30"
+      } ]
+    },
+    "_links" : {
+      "first" : {
+        "href" : "http://localhost:8080/blog/api/v1/posts?page=0&size=10&sort=date,desc"
+      },
+      "self" : {
+        "href" : "http://localhost:8080/blog/api/v1/posts"
+      },
+      "next" : {
+        "href" : "http://localhost:8080/blog/api/v1/posts?page=1&size=10&sort=date,desc"
+      },
+      "last" : {
+        "href" : "http://localhost:8080/blog/api/v1/posts?page=1946&size=10&sort=date,desc"
+      }
+    },
+    "page" : {
+      "size" : 10,
+      "totalElements" : 19465,
+      "totalPages" : 1947,
+      "number" : 0
+    }
+  }
