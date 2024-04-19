@@ -35,7 +35,7 @@ const DataContext = createContext({});
 function App() {
   const [data, setData] = useState({});
   const [dataType, setDataType] = useState('POST_LIST');
-  const [url, setURL] = useState('http://localhost:8080/blog/api/v1/posts');
+  const [trigger, setTrigger] = useState(true);
 
   // getData('http://localhost:8080/blog/api/v1/posts').then(jsonData => setData(jsonData));
 
@@ -46,22 +46,22 @@ function App() {
 
   switch (dataType) {
     case 'POST_LIST':
-      return (  <DataContext.Provider value={{'data': data, 'setData': setData, 'dataType': dataType, 'setDataType':setDataType , 'url': url, 'setURL':setURL  }}>
+      return (  <DataContext.Provider value={{'data': data, 'setData': setData, 'dataType': dataType, 'setDataType':setDataType , 'trigger': trigger, 'setTrigger':setTrigger  }}>
         <div className="App">
           <header className="App-header">
-          <h1>Hello, world!</h1>
-              <p>Learn React!!</p>
           </header>
-          {/* <section className='posts' > 
-            <Post className='post' title={posts[0].title} content={posts[0].content} />
-            <Post className='post' title={posts[1].title} content={posts[1].content} />
-           </section> */}
-          <section className='postlist' ><div> <Postlist data={data}/></div> </section>
+          <section className='postlist' ><div> <Postlist postsPage={data}/></div> </section>
           </div>
           </DataContext.Provider>);
     case 'SINGLE_POST':
-
-      break;
+      return ( <DataContext.Provider value={{'data': data, 'setData': setData, 'dataType': dataType, 'setDataType':setDataType , 'trigger': trigger, 'setTrigger':setTrigger  }}>
+          <div className="App">
+            <header className="App-header">
+            </header>
+            <section className='singlePost'> <Post post={data} /></section>
+            <section className='singlePost'> <Commentlist commentsPage={data.comments} /></section>
+          </div>
+        </DataContext.Provider>);
 
     case 'USER_LIST':
 
@@ -85,68 +85,126 @@ function App() {
 //     </article>);
 // }
 
-function LinkButton({url, children, myType}){
-  // {'data': data, 'setData': setData, 'dataType': dataType, 'setDataType':setDataType , 'url': url, 'setURL':setURL  }
-  const context = useContext(DataContext);
-  const onClick = () => {
-    getData(url).then(response => {
-      context.setData(response);
-      context.setDataType(myType);
-    });
-    
-  };
+function LinkButton({onClick, children, myType}){
   return <button onClick={onClick} className='linkButton'>
           {children}
         </button>
-
 }
 
+/* On click on the post title the post, and its comments are loaded and shown (no matter if that is already shown).
+  On click on the username the user is loaded and shown.
+*/
 function Post({post}){ 
+  const { data, setData, dataType, setDataType ,trigger, setTrigger  } = useContext(DataContext);
+  const postURL = post._links.self.href;
+  const commentsURL = post._links.comments.href;
+  const onPostClick = () => {
+    Promise.all([getData(postURL), getData(commentsURL)])
+      .then(values => {
+        values[0]['comments'] = values[1];
+        // values[0]['comments'] = values[1];
+        setData(values[0]);
+        setDataType('SINGLE_POST');
+        setTrigger(!trigger);
+    });
+  };
+
+  const userURL = post.author._links.self.href;
+  const onUserClick = () => {
+    getData(userURL).then(response => {
+        setData(response);
+        setDataType('SINGLE_USER');
+        setTrigger(!trigger);
+    });
+  };
+
   return (<article className='post'>
-    <LinkButton url={post._links.self} myType='SINGLE_POST' ><h2>{post.title}</h2></LinkButton> 
+    <LinkButton onClick={onPostClick} ><h2>{post.title}</h2></LinkButton> 
     <h3>by 
-      <LinkButton url={post.author._links.self} myType='SINGLE_USER'>
-        {post.author.username}
-      </LinkButton> 
+      <LinkButton onClick={onUserClick} >&nbsp;{post.author.username}&nbsp;</LinkButton> 
       posted on {post.date}
     </h3>
     <p>{post.content}</p>
     </article>);
 }
 
-function PaginationLinks({jsonLinks}){
-  console.log(jsonLinks);
-  Object.keys(jsonLinks).forEach(element => {
-    console.log("element: " + element);
-    console.log("element: " + jsonLinks[element].href);
-    // console.log("key: " + element.key);
-    // console.log("key: " + element.index);
-  });
+
+
+function Comment({comment}){ 
+return (<article className='comment'>
+  <h3>by  {comment.author} posted on {comment.date}</h3>
+  <p>{comment.content}</p>
+  </article>);
+}
+
+/* 
+  Creates links for going to next or previous page. On click data is pulled from the url, and then pushed into the update function.
+  PaginationLinks do not change the type of the top level component 
+  (i.e. when currently showing pages of comments, clicking on a pagination link continues showing pages of comments).
+*/
+function PaginationLinks({urls, update}){
+  // Creates for a url a function that is called on click
+  const onClick = (url) => { return () => (
+    getData(url).then(response => {
+      update(response);
+        // context.setData(response);
+    }));
+  };
+  const linkKeys = ['self', 'first', 'prev', 'next', 'last'];
   return <span className="paginationLinks">
-  {Object.keys(jsonLinks).map((key, index) => (
-        <LinkButton key={jsonLinks[key].href}  url={jsonLinks[key].href} myType='POST_LIST' >
+  {Object.keys(urls).filter((key) => linkKeys.includes(key)).map((key, index) => (
+        <span className="paginationLink" key={urls[key].href + '-' + key + 'span'}  >
+        <LinkButton key={urls[key].href + '-' + key + 'button'}  onClick={onClick(urls[key].href)} >
           {key}
-        </LinkButton> 
-      // <a className="paginationLink" key={jsonLinks[key].href} href={jsonLinks[key].href}>{key}</a>
+        </LinkButton></span>
   ))}</span>;
 }
 
+function Commentlist({commentsPage}){
+  const { data, setData, dataType, setDataType , setTrigger, trigger } = useContext(DataContext);
+  // const data = context.data;
+  if ('_embedded' in commentsPage) {
+    const comments = commentsPage._embedded.commentDTOes;
+    let links = commentsPage._links;
 
-function Postlist({data, setURL, setData}){
-  // return <>{posts.map(function(post) {
-  //   return <Post key={post.postId} className='post' content={post.content} title={post.title} />
-  // })}</>;   
-  // debugger;
-  if ('_embedded' in data) {
-    const posts = data._embedded.postDTOes;
-    const links = data._links;
+    const commentsComponents = comments.map(comment =>
+      <Comment  key={comment.commentId} comment={comment} />
+    );   
+    // What should the pagination links to when clicked? Update the comments data
+    const update = (newComments) => {
+      const dataCopy = data;
+      dataCopy.comments = newComments;
+      setTrigger(!trigger);
+      // setData(Object.assign(data, {'comments' : newComments}));
+
+      // data.comments = newComments;
+      setData(dataCopy);
+    };
+
+    const linksComponents = <PaginationLinks urls={links} update={update} />
+    return  <section className='commentList' ><div>{commentsComponents} {linksComponents}</div></section>;
+  } else {
+    return <span>No comments yet</span>;
+  }
+
+}
+
+function Postlist({postsPage}){
+  const { data, setData, dataType, setDataType , setTrigger, trigger } = useContext(DataContext);
+  if ('_embedded' in postsPage) {
+    const posts = postsPage._embedded.postDTOes;
+    const links = postsPage._links;
   
     const postsComponents = posts.map(post =>
       <Post  key={post.postId} post={post} />
     );   
-    const linksComponents = <PaginationLinks jsonLinks={links}/>
-  
-    return <div>{postsComponents} {linksComponents}</div>;
+    // What should the pagination links to when clicked? Update the posts data
+    const update = (newPosts) => {
+      setData(newPosts);
+      setTrigger(!trigger);
+    };
+    const linksComponents = <PaginationLinks urls={links} update={update} />
+    return  <section className='postlist' ><div>{postsComponents} {linksComponents}</div></section>;
   } else {
     return <span>loading...</span>;
   }
