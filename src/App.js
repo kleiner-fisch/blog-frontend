@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { createContext, useEffect } from 'react';
 import { useState, useContext } from 'react';
+import sanitizeHtml from 'sanitize-html';
 
 
 import './index.css';
@@ -98,6 +99,16 @@ function LinkButton({onClick, children, myType}){
         </button>
 }
 
+/**
+ * returns the text wrapped in an react-attribute that safely renders HTML symbols
+ * @param {*} text 
+ * @returns 
+ */
+function decodeHTMLText(text){
+  return {dangerouslySetInnerHTML:{__html:sanitizeHtml(text)}};
+}
+
+
 /* On click on the post title the post, and its comments are loaded and shown (no matter if that is already shown).
   On click on the username the user is loaded and shown.
 */
@@ -134,7 +145,7 @@ function Post({post}){
       <LinkButton onClick={onUserClick} >&nbsp;{post.author.username}&nbsp;</LinkButton> 
       posted on {post.date}
     </h3>
-    <p>{post.content}</p>
+    <p {...decodeHTMLText(post.content)} />
     </article>);
 }
 
@@ -186,7 +197,9 @@ function User({user}){
 function Comment({comment}){ 
 return (<article className='comment'>
   <h3>by  {comment.author} posted on {comment.date}</h3>
-  <p>{comment.content}</p>
+  {/* <p>{comment.content}</p> */}
+  <p {...decodeHTMLText(comment.content)} />
+
   </article>);
 }
 
