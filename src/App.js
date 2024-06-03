@@ -29,12 +29,17 @@ function getData(url) {
   }
 
 
+  const SINGLE_USER = 'SINGLE_USER';
+  const POST_LIST = 'POST_LIST';
+  const USER_LIST = 'USER_LIST';
+  const SINGLE_POST = 'SINGLE_POST';
+
 
 const DataContext = createContext({});
 
 function App() {
   const [data, setData] = useState({});
-  const [dataType, setDataType] = useState('POST_LIST');
+  const [dataType, setDataType] = useState(POST_LIST);
   const [trigger, setTrigger] = useState(true);
 
   // getData('http://localhost:8080/blog/api/v1/posts').then(jsonData => setData(jsonData));
@@ -45,7 +50,7 @@ function App() {
   );
 
   switch (dataType) {
-    case 'POST_LIST':
+    case POST_LIST:
       return (  <DataContext.Provider value={{'data': data, 'setData': setData, 'dataType': dataType, 'setDataType':setDataType , 'trigger': trigger, 'setTrigger':setTrigger  }}>
         <div className="App">
           <header className="App-header">
@@ -53,37 +58,39 @@ function App() {
           <section className='postlist' ><div> <Postlist postsPage={data}/></div> </section>
           </div>
           </DataContext.Provider>);
-    case 'SINGLE_POST':
+    case SINGLE_POST:
       return ( <DataContext.Provider value={{'data': data, 'setData': setData, 'dataType': dataType, 'setDataType':setDataType , 'trigger': trigger, 'setTrigger':setTrigger  }}>
           <div className="App">
             <header className="App-header">
             </header>
             <section className='singlePost'> <Post post={data} /></section>
-            <section className='singlePost'> <Commentlist commentsPage={data.comments} /></section>
+            <section className='commentsList'> <Commentlist commentsPage={data.comments} /></section>
           </div>
         </DataContext.Provider>);
 
-    case 'USER_LIST':
-
-      break;
-    case 'SINGLE_USER':
-
-      break;
+    case USER_LIST:
+      // Here we show a list of all users
+      return (  <DataContext.Provider value={{'data': data, 'setData': setData, 'dataType': dataType, 'setDataType':setDataType , 'trigger': trigger, 'setTrigger':setTrigger  }}>
+        <div className="App">
+          <header className="App-header">
+          </header>
+          <section className='userlist' ><div> <Userlist usersPage={data}/></div> </section>
+          </div>
+          </DataContext.Provider>);
+    case SINGLE_USER:
+      // here we show a single user, along with a list of their posts
+      return (  <DataContext.Provider value={{'data': data, 'setData': setData, 'dataType': dataType, 'setDataType':setDataType , 'trigger': trigger, 'setTrigger':setTrigger  }}>
+        <div className="App">
+          <header className="App-header">
+          </header>
+          <section className='singleUser'> <User user={data} /></section>
+          <section className='userPosts' ><div> <Postlist postsPage={data.userPosts}/></div> </section>
+          </div>
+          </DataContext.Provider>);
     default:
       throw new Error('unexcepted type: ' + dataType);
   }
 }
-
-
-// function Post({post}){ 
-//   return (<article className='post'>
-//     <LinkButton link={post._links.self}> <h2>{post.title}</h2></LinkButton>
-//     <a href= rel="noreferrer"> </a> 
-//     <h3>by <a href={post.author._links.self} rel="noreferrer"> {post.author.username}</a> posted on {post.date}</h3>
-//     {/* console.log({content}) */}
-//     <p>{post.content}</p>
-//     </article>);
-// }
 
 function LinkButton({onClick, children, myType}){
   return <button onClick={onClick} className='linkButton'>
@@ -104,18 +111,21 @@ function Post({post}){
         values[0]['comments'] = values[1];
         // values[0]['comments'] = values[1];
         setData(values[0]);
-        setDataType('SINGLE_POST');
+        setDataType(SINGLE_POST);
         setTrigger(!trigger);
     });
   };
 
-  const userURL = post.author._links.self.href;
+  const userURL =  post.author._links.self.href;
+  const userPostsURL = post.author._links.userPosts.href;
   const onUserClick = () => {
-    getData(userURL).then(response => {
-        setData(response);
-        setDataType('SINGLE_USER');
+    Promise.all([getData(userURL), getData(userPostsURL)])
+      .then(values => {
+        values[0]['userPosts'] = values[1];
+        setData(values[0]);
+        setDataType(SINGLE_USER);
         setTrigger(!trigger);
-    });
+        });
   };
 
   return (<article className='post'>
@@ -128,6 +138,49 @@ function Post({post}){
     </article>);
 }
 
+
+function Userlist({usersPage}){
+  const { data, setData, dataType, setDataType , setTrigger, trigger } = useContext(DataContext);
+  if ('_embedded' in usersPage) {
+    const users = usersPage._embedded.userDTOes;
+    const links = usersPage._links;
+  
+    const usersComponents = users.map(user =>
+      <User  key={user.postId} user={user} />
+    );   
+    // What should the pagination links to when clicked? Update the posts data
+    const update = (newUsers) => {
+      setData(newUsers);
+      setTrigger(!trigger);
+    };
+    const linksComponents = <PaginationLinks urls={links} update={update} />
+    return  <section className='userlist' ><div>{usersComponents} {linksComponents}</div></section>;
+  } else {
+    return <span>loading...</span>;
+  }
+
+}
+
+
+function User({user}){ 
+  const { data, setData, dataType, setDataType ,trigger, setTrigger  } = useContext(DataContext);
+  const userURL = user._links.userPosts.href;
+  const userPostsURL = user._links.self.href;
+  const onUserClick = () => {
+    Promise.all([getData(userURL), getData(userPostsURL)])
+      .then(values => {
+        values[0]['userPosts'] = values[1];
+        setData(values[0]);
+        setDataType(SINGLE_USER);
+        setTrigger(!trigger);
+      });
+  };
+
+  return (<article className='user'>
+    <LinkButton onClick={onUserClick} ><h4>{user.username}</h4></LinkButton> 
+    <h4>{user.mail}</h4>
+    </article>);
+}
 
 
 function Comment({comment}){ 
@@ -200,8 +253,16 @@ function Postlist({postsPage}){
     );   
     // What should the pagination links to when clicked? Update the posts data
     const update = (newPosts) => {
-      setData(newPosts);
-      setTrigger(!trigger);
+      if(dataType === SINGLE_USER){
+        data.userPosts = newPosts;
+        setData(data);
+        setTrigger(!trigger);
+      }else if (dataType === POST_LIST) {
+        setData(newPosts);
+        setTrigger(!trigger);
+      } else {
+        throw new Error('unexpected data type');
+      }
     };
     const linksComponents = <PaginationLinks urls={links} update={update} />
     return  <section className='postlist' ><div>{postsComponents} {linksComponents}</div></section>;
