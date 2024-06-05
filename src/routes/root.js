@@ -4,7 +4,6 @@ import { useState, useContext } from 'react';
 import sanitizeHtml from 'sanitize-html';
 
 
-import './index.css';
 
 
 // async function getData(url, setData) {
@@ -38,7 +37,7 @@ function getData(url) {
 
 const DataContext = createContext({});
 
-function App() {
+function Root() {
   const [data, setData] = useState({});
   const [dataType, setDataType] = useState(POST_LIST);
   const [trigger, setTrigger] = useState(true);
@@ -286,7 +285,7 @@ function Postlist({postsPage}){
 
 
 
-export default App;
+export default Root;
 
 
 
