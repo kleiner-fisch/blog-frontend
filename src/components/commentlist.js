@@ -10,7 +10,7 @@ import {PaginationLinks, PaginationLinks2} from './Pagination';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-
+import Stack from '@mui/material/Stack';
 
 
 
@@ -103,7 +103,7 @@ function Commentlist(){
       );   
 
       const linksComponents = <PaginationLinks currentPage={currentPage} totalPages={totalPages} location={location} />
-      result = <Box component={'section'}>{commentsComponents} {linksComponents}</Box>;
+      result = <Box component={'section'}><Stack>{commentsComponents}</Stack> {linksComponents}</Box>;
     }
   }
   return  <section className='commentList' ><Typography variant='h3'>Comments</Typography>{result}</section>;

@@ -10,6 +10,8 @@ import {PaginationLinks2, PaginationLinks} from './Pagination';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+
 
 
 function Post({post}){ 
@@ -81,7 +83,7 @@ function Postlist(){
     );   
 
     const linksComponents = <PaginationLinks currentPage={currentPage} totalPages={totalPages} location={location} />
-    return <Box component={'section'}>{postsComponents} {linksComponents}</Box>;
+    return <Box component={'section'}><Stack>{postsComponents}</Stack> {linksComponents}</Box>;
   }
 
 }
