@@ -5,6 +5,13 @@ import { useParams, Link, useLocation, useSearchParams, useNavigate } from 'reac
 import { useState, useEffect } from 'react';
 
 import { baseURL, getData,  decodeHTMLText} from '../my_util';
+import {PaginationLinks, PaginationLinks2} from './Pagination';
+
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
+
+
 
 
 function getURL(postId, page=1, order='desc') {
@@ -15,20 +22,24 @@ function getURL(postId, page=1, order='desc') {
 
 function Comment({comment}){ 
   return (<article className='comment'>
-    <h6>by  {comment.author} posted on {comment.date}</h6>
-    <p {...decodeHTMLText(comment.content)} />
+    <Typography variant='h6'>by  {comment.author} posted on {comment.date}</Typography>
+    <Typography {...decodeHTMLText(comment.content)} /> 
     </article>);
 }
 
 function Commentlist(){
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
   const params = useParams();
-  const [commentsPagination, setComments] = useState();
+  // const page = parseInt(query.get('page') || '1', 10);
+
+  const [commentsPagination, setComments] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  const location =  useLocation();
-  const navigate = useNavigate();
+  // const location =  useLocation();
+  // const navigate = useNavigate();
 
   const postId = params.postId;
-  const order = searchParams.get('order') == null ? 'desc' : searchParams.get('order');
+  const my_order = searchParams.get('order') == null ? 'desc' : searchParams.get('order');
   const page = searchParams.get('page') == null ? 0 : parseInt(searchParams.get('page'));
   
   useEffect(() => {
@@ -38,7 +49,7 @@ function Commentlist(){
 
     const fetchData = async () => {
       try {
-        const response = await fetch(getURL(postId, page, order), { signal });
+        const response = await fetch(getURL(postId, page, my_order), { signal });
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -56,7 +67,7 @@ function Commentlist(){
     return () => {
       controller.abort();
     };
-  }, [params, searchParams, postId, page, order]);
+  }, [postId, page, my_order]);
 
   let result = null; 
 
@@ -92,33 +103,13 @@ function Commentlist(){
       );   
 
       const linksComponents = <PaginationLinks currentPage={currentPage} totalPages={totalPages} location={location} />
-      result = <div>{commentsComponents} {linksComponents}</div>;
+      result = <Box component={'section'}>{commentsComponents} {linksComponents}</Box>;
     }
   }
-  return  <section className='commentList' ><h3>Comments</h3>{result}</section>;
+  return  <section className='commentList' ><Typography variant='h3'>Comments</Typography>{result}</section>;
 }
 
 
-function PaginationLinks({ currentPage, totalPages, location }) {
-  return (
-    <div>
-      {currentPage > 2 && (
-          <Link to={{ pathname:location.pathname, search: '?page=1' }}>First</Link>
-      )}
-      {currentPage > 1 && (
-          <Link to={{ pathname:location.pathname, search: `?page=${currentPage - 1}` }}>previous</Link>
-      )}        
-      {currentPage < totalPages && (
-          <Link to={{ pathname:location.pathname, search: `?page=${currentPage + 1}` }}>next</Link>
-      )}
-      {currentPage < totalPages -1 && (
-          <Link to={{ pathname:location.pathname, search: `?page=${totalPages}` }}>last</Link>        
-      )}
-    </div>
-  );
-}
-
-  
 export default Commentlist;
 
 

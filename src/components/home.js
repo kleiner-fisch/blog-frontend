@@ -1,3 +1,6 @@
+import Button from '@mui/material/Button';
+import  Typography  from '@mui/material/Typography';
+
 export function Home(){
-    return (<h1>Home</h1>);
+    return (<div> <Button>Click Me</Button><h1>Home</h1></div>);
 } 

@@ -1,3 +1,9 @@
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'  
@@ -9,6 +15,8 @@ import {About} from './components/about';
 import {Contact} from './components/contact';
 
 import Post from './components/single_post'
+import Postlist from './components/postlist'
+
 /*
   - posts/:postId?page=1 (page refers to comments page)
   - posts?page=1&userId=3 (default page is 0, userId has no default, allows to filter by user)
