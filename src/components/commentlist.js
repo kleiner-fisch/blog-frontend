@@ -5,10 +5,13 @@ import { useParams, Link, useLocation, useSearchParams, useNavigate } from 'reac
 import { useState, useEffect } from 'react';
 
 import { baseURL, getData,  decodeHTMLText} from '../my_util';
-import {PaginationLinks, PaginationLinks2} from './Pagination';
+import {PaginationLinks} from './Pagination';
+import Sorting from './Sorting';
+
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 import Stack from '@mui/material/Stack';
 
@@ -38,8 +41,9 @@ function Commentlist(){
   // const location =  useLocation();
   // const navigate = useNavigate();
 
+
   const postId = params.postId;
-  const my_order = searchParams.get('order') == null ? 'desc' : searchParams.get('order');
+  const order = searchParams.get('sort') == null ? 'desc' : searchParams.get('sort');
   const page = searchParams.get('page') == null ? 0 : parseInt(searchParams.get('page'));
   
   useEffect(() => {
@@ -49,7 +53,7 @@ function Commentlist(){
 
     const fetchData = async () => {
       try {
-        const response = await fetch(getURL(postId, page, my_order), { signal });
+        const response = await fetch(getURL(postId, page, order), { signal });
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -67,7 +71,7 @@ function Commentlist(){
     return () => {
       controller.abort();
     };
-  }, [postId, page, my_order]);
+  }, [postId, page, order]);
 
   let result = null; 
 
@@ -79,7 +83,6 @@ function Commentlist(){
     if(result == null && totalPages === 0){
       result = (<p>No comments yet</p>);
     } else if(result == null && page > totalPages){
-
       // TODO 
       // The following approach to redericting in case of too large page number does not work. 
       // The problem is that for some reason the fetched data is inconsistent with the data used to fetch it.
@@ -97,16 +100,18 @@ function Commentlist(){
       // return null;
     }else {
 
+      const orderComponent = <Sorting  currentOrder={order} location={location}/>
+
       const comments = commentsPagination._embedded.commentDTOes;
       const commentsComponents = comments.map(comment =>
         <Comment  key={comment.commentId} comment={comment} />
       );   
 
-      const linksComponents = <PaginationLinks currentPage={currentPage} totalPages={totalPages} location={location} />
-      result = <Box component={'section'}><Stack>{commentsComponents}</Stack> {linksComponents}</Box>;
+      const linksComponents = <PaginationLinks order={order} currentPage={currentPage} totalPages={totalPages} location={location} />
+      result = <Box component={'section'}>{orderComponent} <Stack>{commentsComponents}</Stack> {linksComponents}</Box>;
     }
   }
-  return  <section className='commentList' ><Typography variant='h3'>Comments</Typography>{result}</section>;
+  return  <section className='commentList' ><Typography variant='h4'>Comments</Typography>{result}</section>;
 }
 
 

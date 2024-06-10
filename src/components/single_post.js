@@ -5,6 +5,8 @@ import { decodeHTMLText, baseURL, isSet}  from '../my_util';
 
 import Commentlist from './commentlist';
 import { useState, useEffect } from 'react';
+import Typography from '@mui/material/Typography';
+
 
 //- posts/:postId/:commentsPage
 
@@ -30,7 +32,7 @@ function Post(){
     };
 
     fetchData();
-  },[]);
+  },[postId]);
 
   if (!post) {
     return <div>Loading...</div>;  // Render a loading state while data is being fetched
@@ -39,13 +41,13 @@ function Post(){
   const userId = post.author.userId;
 
   return (<div><article className='post'>
-      <h2>{post.title}</h2>
-    <h3>by 
+      <Typography variant={"h5"} {...decodeHTMLText(post.title)} />
+      <Typography variant={'h6'}>by&nbsp;
       <Link to={'/users/' + userId} >
-        &nbsp;{post.author.username}&nbsp;
+        {post.author.username}
       </Link>
-      posted on {post.date}
-    </h3>
+      &nbsp;posted on {post.date}
+    </Typography>
     <p {...decodeHTMLText(post.content)} />
     </article>
       <Commentlist />

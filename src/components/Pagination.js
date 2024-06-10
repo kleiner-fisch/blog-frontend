@@ -24,7 +24,7 @@ export function PaginationLinks2({ currentPage, totalPages, location }) {
     );
   }
 
-  export function PaginationLinks({ currentPage, totalPages, location }){
+  export function PaginationLinks({ currentPage, totalPages, location, order }){
     return (<Box justifyContent={'center'} alignItems={"center"} display={"flex"}>
         <Pagination
       page={currentPage}
@@ -32,7 +32,7 @@ export function PaginationLinks2({ currentPage, totalPages, location }) {
       renderItem={(item) => (
         <PaginationItem
           component={Link}
-          to={{ pathname: location.pathname, search: `?page=${item.page}` }}
+          to={{ pathname: location.pathname, search: `?page=${item.page}&sort=${order}` }}
           {...item}
         />
       )}

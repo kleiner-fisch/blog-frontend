@@ -6,7 +6,9 @@ import { useState, useEffect } from 'react';
 
 import { baseURL, decodeHTMLText} from '../my_util';
 
-import {PaginationLinks2, PaginationLinks} from './Pagination';
+import {PaginationLinks} from './Pagination';
+import Sorting from './Sorting';
+
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -16,12 +18,14 @@ import Stack from '@mui/material/Stack';
 
 function Post({post}){ 
   return (<article className='post'>
-    <Link to={`./${post.postId}/comments`}><h2>{post.title}</h2></Link>
-    <Typography variant={'h3'}>by 
-      <Link to={'/user/'+post.author.userId} >
-        &nbsp;{post.author.username}&nbsp;
+    <Link to={`./${post.postId}/comments`}>
+      <Typography variant={"h5"} {...decodeHTMLText(post.title)} />
       </Link>
-      posted on {post.date}
+    <Typography variant={'h6'}>by&nbsp; 
+      <Link to={'/user/'+post.author.userId} >
+        {post.author.username}
+      </Link>
+      &nbsp;posted on {post.date}
     </Typography>
     <Typography {...decodeHTMLText(post.content)} />
     </article>);
@@ -38,7 +42,7 @@ function Postlist(){
   const [searchParams, setSearchParams] = useSearchParams();
   const location =  useLocation();
 
-  const order = searchParams.get('order') == null ? 'desc' : searchParams.get('order');
+  const order = searchParams.get('sort') == null ? 'desc' : searchParams.get('sort');
   const page = searchParams.get('page') == null ? 0 : parseInt(searchParams.get('page'));
   
   useEffect(() => {
@@ -77,13 +81,14 @@ function Postlist(){
       return (<p>No posts yet</p>);
     }
 
+    const orderComponent = <Sorting  currentOrder={order} location={location}/>
     const posts = postsPagination._embedded.postDTOes;  
     const postsComponents = posts.map(post =>
       <Post  key={post.postId} post={post} />
     );   
 
-    const linksComponents = <PaginationLinks currentPage={currentPage} totalPages={totalPages} location={location} />
-    return <Box component={'section'}><Stack>{postsComponents}</Stack> {linksComponents}</Box>;
+    const linksComponents = <PaginationLinks order={order} currentPage={currentPage} totalPages={totalPages} location={location} />
+    return <Box component={'section'}>{orderComponent}<Stack>{postsComponents}</Stack> {linksComponents}</Box>;
   }
 
 }
