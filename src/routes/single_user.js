@@ -10,10 +10,14 @@ function User(){
 
   const userURL = user._links.userPosts.href;
 
-  return (<article className='user'>
+  return (<div><article className='user'>
     <Link to={getViewURL(userURL)} ><h4>{user.username}</h4></Link> 
     <h4>{user.mail}</h4>
-    </article>);
+    </article>
+    <section className='userPosts'>
+      
+    </section>
+    </div>);
 }
 
 

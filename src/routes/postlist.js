@@ -15,9 +15,9 @@ function Post({post}){
   const userPostsURL = post.author._links.userPosts.href;
 
   return (<article className='post'>
-    <Link to={getViewURL(postURL)}><h2>{post.title}</h2></Link>
+    <Link to={getViewURL('/posts/' + post.postId)}><h2>{post.title}</h2></Link>
     <h3>by 
-      <Link to={getViewURL(userURL)} >
+      <Link to={getViewURL('/user/'+post.author.userId)} >
         &nbsp;{post.author.username}&nbsp;
       </Link>
       posted on {post.date}
