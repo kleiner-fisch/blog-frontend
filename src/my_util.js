@@ -1,7 +1,8 @@
 import sanitizeHtml from 'sanitize-html';
 
 
-export const baseURL = 'http://localhost:8080/blog/api/v1';
+// export const baseURL = 'http://localhost:8080/blog/api/v1';
+export const baseURL = 'https://hody-blog.azurewebsites.net/blog/api/v1';
 
 export  function getData(url) { 
         return fetch(url)
