@@ -4,8 +4,6 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'  
 
 import './index.css';

@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { useParams, Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 
 import { useState, useEffect } from 'react';

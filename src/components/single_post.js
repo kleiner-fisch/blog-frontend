@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useParams, Link } from 'react-router-dom';
 import { decodeHTMLText, baseURL, isSet}  from '../my_util';
