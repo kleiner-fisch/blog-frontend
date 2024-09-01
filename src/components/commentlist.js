@@ -6,6 +6,7 @@ import { baseURL, getData,  decodeHTMLText} from '../my_util';
 import {PaginationLinks} from './Pagination';
 import Sorting from './Sorting';
 
+import { BarLoader } from 'react-spinners';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -32,7 +33,7 @@ function Commentlist(){
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const params = useParams();
-  // const page = parseInt(query.get('page') || '1', 10);
+  const [loading, setLoading] = useState(true);
 
   const [commentsPagination, setComments] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -57,6 +58,8 @@ function Commentlist(){
         }
         const result = await response.json();
         setComments(result);
+        setLoading(false);
+
       } catch (error) {
         if (error.name !== 'AbortError') {
           console.error('Fetch error:', error);
@@ -73,30 +76,14 @@ function Commentlist(){
 
   let result = null; 
 
-  if (!commentsPagination) {
-    result = <div>Loading...</div>;  // Render a loading state while data is being fetched
+  if (loading) {
+    result = <BarLoader loading={loading} />;
   }else {
     const totalPages = parseInt(commentsPagination.page.totalPages);
-    const currentPage = parseInt(commentsPagination.page.number) + 1;
-    if(result == null && totalPages === 0){
+    const currentPage = Math.min(parseInt(commentsPagination.page.number) + 1, totalPages);
+    if(totalPages === 0){
       result = (<p>No comments yet</p>);
-    } else if(result == null && page > totalPages){
-      // TODO 
-      // The following approach to redericting in case of too large page number does not work. 
-      // The problem is that for some reason the fetched data is inconsistent with the data used to fetch it.
-      // That is, page is not equal to the page number in the fetched data (stored in commentsPagination.page.number)
-      // So, for now, instead of redirecting we simply show that for this page number there is no data, and we show for which there is
-      // The problem somehow seems to be that clicking a link, or being redirected there does works differently 
-      // from the user inserting the URL and hitting enter. 
-      // Because, when I show the link below and have the user click it, the problem persists.
-      const link = <Link to={{ pathname:location.pathname, search: `?page=${totalPages}` }}>{`page ${totalPages}`}</Link>
-
-      result = (<p>{`For page ${page} there are no comments. Please go to page ${totalPages}`}</p>);
-
-      // forward to last page with entries
-      // navigate(`${location.pathname}?page=${totalPages}`);
-      // return null;
-    }else {
+    } else {
 
       const orderComponent = <Sorting  currentOrder={order} location={location}/>
 

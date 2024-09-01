@@ -8,6 +8,7 @@ import { baseURL, decodeHTMLText} from '../my_util';
 import {PaginationLinks} from './Pagination';
 import Sorting from './Sorting';
 
+import { BarLoader } from 'react-spinners';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -37,7 +38,8 @@ function getURL(page=1, order='desc') {
 
 function Postlist(){
   const params = useParams();
-  const [postsPagination, setPosts] = useState();
+  const [postsPagination, setPosts] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const location =  useLocation();
 
@@ -57,6 +59,7 @@ function Postlist(){
         }
         const result = await response.json();
         setPosts(result);
+        setLoading(false);
       } catch (error) {
         if (error.name !== 'AbortError') {
           console.error('Fetch error:', error);
@@ -71,8 +74,10 @@ function Postlist(){
     };
   }, [params, searchParams, page, order]);
 
-  if (!postsPagination || !('_embedded' in postsPagination)) {
-    return <div>Loading...</div>;  // Render a loading state while data is being fetched
+  if(loading) {
+    return <BarLoader loading={loading} />;
+  // if (!postsPagination || !('_embedded' in postsPagination)) {
+  //   return <div>Loading...</div>;  // Render a loading state while data is being fetched
   }else {
     const totalPages = parseInt(postsPagination.page.totalPages);
     const currentPage = parseInt(postsPagination.page.number) + 1;
