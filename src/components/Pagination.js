@@ -1,9 +1,7 @@
 
 import { Link } from 'react-router-dom';
 
-import Pagination from '@mui/material/Pagination';
-import PaginationItem from '@mui/material/PaginationItem';
-import Box from '@mui/material/Box';
+import {Box, PaginationItem, Pagination } from '@mui/material';
 
 export function PaginationLinks2({ currentPage, totalPages, location }) {
     return (

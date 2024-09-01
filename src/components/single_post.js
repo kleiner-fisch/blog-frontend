@@ -4,7 +4,7 @@ import { decodeHTMLText, baseURL, isSet}  from '../my_util';
 
 import Commentlist from './commentlist';
 import { useState, useEffect } from 'react';
-import Typography from '@mui/material/Typography';
+import {Typography} from '@mui/material';
 import { BarLoader } from 'react-spinners';
 
 

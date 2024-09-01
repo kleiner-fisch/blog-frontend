@@ -10,10 +10,7 @@ import Sorting from './Sorting';
 
 import { BarLoader } from 'react-spinners';
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
-
+import {Box, Typography,Stack}  from '@mui/material';
 
 
 function Post({post}){ 

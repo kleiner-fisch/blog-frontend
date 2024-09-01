@@ -1,18 +1,14 @@
-import { useParams, Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useSearchParams } from 'react-router-dom';
 
 import { useState, useEffect } from 'react';
 
-import { baseURL, getData,  decodeHTMLText} from '../my_util';
+import { baseURL,  decodeHTMLText} from '../my_util';
 import {PaginationLinks} from './Pagination';
 import Sorting from './Sorting';
 
 import { BarLoader } from 'react-spinners';
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-
-import Stack from '@mui/material/Stack';
+import {Box, Typography, Stack } from '@mui/material';
 
 
 
@@ -80,7 +76,7 @@ function Commentlist(){
     result = <BarLoader loading={loading} />;
   }else {
     const totalPages = parseInt(commentsPagination.page.totalPages);
-    const currentPage = Math.min(parseInt(commentsPagination.page.number) + 1, totalPages);
+    const currentPage = parseInt(commentsPagination.page.number) + 1;
     if(totalPages === 0){
       result = (<p>No comments yet</p>);
     } else {
